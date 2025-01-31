@@ -1,36 +1,24 @@
 package com.FinanceTrack.FinanceAppML.MFlow;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import jakarta.annotation.PostConstruct;
-
-@Repository
+@Repository // JDBC Repository
 public class MRepository {
 
-    private List<MoneyTransaction> mfs = new ArrayList<>();
+    private static final Logger log = LoggerFactory.getLogger(MRepository.class);
+    private final JdbcClient jdbcClient;
 
-    @PostConstruct
-    private void init() {
-        mfs.add(new MoneyTransaction(1, 100, LocalDateTime.now(), "Test"));
-        mfs.add(new MoneyTransaction(2, 200, LocalDateTime.now(), "Test2"));
+    public MRepository(JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
 
-    List<MoneyTransaction> findAll() {
-        return mfs;
-    }
-
-    Optional<MoneyTransaction> findById(int id) {
-        return mfs.stream().filter(mf -> mf.id() == id).findFirst();
-    }
-
-    // Post
-    void newTransaction(MoneyTransaction mt) {
-        mfs.add(mt);
+    public List<MoneyTransaction> findAll() {
+        return jdbcClient.sql("select * from transaction").query(MoneyTransaction.class).list();
     }
 
 }
