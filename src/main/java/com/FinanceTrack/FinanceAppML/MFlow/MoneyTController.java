@@ -31,32 +31,30 @@ public class MoneyTController {
         return mr.findAll();
     }
 
-    // @GetMapping("/{id}")
-    // MoneyTransaction findById(@PathVariable int id) {
-    // Optional<MoneyTransaction> mt = mr.findById(id);
-    // if (mt.isEmpty())
-    // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not
-    // found.");
-    // return mt.get();
-    // }
+    @GetMapping("/{id}")
+    MoneyTransaction findById(@PathVariable int id) {
+        Optional<MoneyTransaction> mt = mr.findById(id);
+        if (mt.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found.");
+        return mt.get();
+    }
 
-    // @ResponseStatus(HttpStatus.CREATED)
-    // @PostMapping("") // Post
-    // void newTransaction(@RequestBody MoneyTransaction mt) {
-    // mr.newTransaction(mt);
-    // }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("") // Post
+    void newTransaction(@RequestBody MoneyTransaction mt) {
+        mr.create(mt);
+    }
 
-    // @ResponseStatus(HttpStatus.NO_CONTENT)
-    // @PutMapping("/{id}") // Put
-    // void updateTransaction(@RequestBody MoneyTransaction mt, @PathVariable int
-    // id) {
-    // mr.updateTransaction(mt, id);
-    // }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}") // Put
+    void updateTransaction(@RequestBody MoneyTransaction mt, @PathVariable int id) {
+        mr.update(mt, id);
+    }
 
-    // @ResponseStatus(HttpStatus.NO_CONTENT)
-    // @DeleteMapping("/{id}") // Delete
-    // void deleteTransaction(@PathVariable int id) {
-    // mr.deleteTransaction(id);
-    // }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}") // Delete
+    void deleteTransaction(@PathVariable int id) {
+        mr.delete(id);
+    }
 
 }
