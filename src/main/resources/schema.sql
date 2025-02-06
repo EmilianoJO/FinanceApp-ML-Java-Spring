@@ -1,0 +1,9 @@
+DROP TABLE TRANSACTIONS;
+CREATE TABLE IF NOT EXISTS TRANSACTIONS (
+    id INT NOT NULL,
+    money_transf FLOAT NOT NULL,
+    transf_on TIMESTAMP NOT NULL,
+    reason VARCHAR(100),
+    PRIMARY KEY (id),
+    version INT
+);

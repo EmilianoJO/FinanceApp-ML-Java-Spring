@@ -42,19 +42,24 @@ public class MoneyTController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("") // Post
     void newTransaction(@RequestBody MoneyTransaction mt) {
-        mr.create(mt);
+        mr.save(mt);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}") // Put
     void updateTransaction(@RequestBody MoneyTransaction mt, @PathVariable int id) {
-        mr.update(mt, id);
+        mr.save(mt);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}") // Delete
     void deleteTransaction(@PathVariable int id) {
-        mr.delete(id);
+        mr.delete(mr.findById(id).get());
+    }
+
+    @GetMapping("/reason/{reason}")
+    List<MoneyTransaction> findByReason(@PathVariable String Reason) {
+        return mr.findAllByReason(Reason);
     }
 
 }
