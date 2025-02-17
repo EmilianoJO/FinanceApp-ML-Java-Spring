@@ -34,14 +34,14 @@ public class JdbcClientMRepository {
 
     public void create(MoneyTransaction mt) {
         var updated = jdbcClient.sql("INSERT INTO TRANSACTIONS(id, money_transf, transf_on, reason) VALUES(?,?,?,?)")
-                .params(List.of(mt.id(), mt.money_transf(), mt.transf_on(), mt.reason()))
+                .params(List.of(mt.id(), mt.moneyTransf(), mt.transfOn(), mt.reason()))
                 .update();
         Assert.state(updated == 1, "Failed to create transaction " + mt.reason());
     }
 
     public void update(MoneyTransaction mt, Integer id) {
         var updated = jdbcClient.sql("UPDATE TRANSACTIONS SET money_transf = ?, transf_on = ?, reason = ? WHERE id = ?")
-                .params(List.of(mt.money_transf(), mt.transf_on(), mt.reason().toString(), id))
+                .params(List.of(mt.moneyTransf(), mt.transfOn(), mt.reason().toString(), id))
                 .update();
         Assert.state(updated == 1, "Failed to update transaction " + mt.reason());
     }

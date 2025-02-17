@@ -6,11 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "TRANSACTIONS")
+@Table(name = "moneytransaction")
 public record MoneyTransaction(
-                @Id Integer id,
-                float money_transf,
-                LocalDateTime transf_on,
-                String reason,
-                @Version Integer version) {
+        @Id Integer id,
+        float moneyTransf,
+        LocalDateTime transfOn,
+        String reason,
+        @Version Integer version) {
 }
