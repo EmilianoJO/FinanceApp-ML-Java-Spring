@@ -1,5 +1,11 @@
 :root {
-    color-scheme: light dark;
+    overflow-x: hidden;
+    //overflow-y: hidden;
+    background-image: linear-gradient(to right, rgb(46, 95, 255), rgb(5, 5, 172));
+    height: 100%;
+    color: white;
 }
 
 body {}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
