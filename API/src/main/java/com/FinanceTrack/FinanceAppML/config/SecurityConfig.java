@@ -1,4 +1,4 @@
-package com.FinanceTrack.config;
+package com.FinanceTrack.FinanceAppML.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +18,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(
-                        authRequest -> authRequest.requestMatchers("/auth/**").permitAll()
-                                .anyRequest().authenticated())
+                .authorizeHttpRequests(authRequest -> authRequest
+                        .requestMatchers("/auth/**").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(withDefaults()).build();
     }
 
